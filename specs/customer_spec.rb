@@ -11,7 +11,7 @@ class CustomerTest < MiniTest::Test
     @drink2 = Drink.new("Irn Bru on the rocks", 4, 0)
     @drink3 = Drink.new("Pint of Whisky",600,100)
 
-    # [name,money,age]
+    # [name,  money,  age]
     @customer1 = Customer.new("Peter Whiffle",50,67)
     @customer2 = Customer.new("Janet Staples",25,23)
     @customer3 = Customer.new("Jason Cup",695,17)

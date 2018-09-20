@@ -9,5 +9,9 @@ class Customer
     @drunk = 0
   end
 
+  def remove_funds(amount_to_remove)
+    @money -= amount_to_remove
+  end
+
 
 end

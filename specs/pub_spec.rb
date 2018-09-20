@@ -12,7 +12,7 @@ class PubTest < MiniTest::Test
     @drink2 = Drink.new("Irn Bru on the rocks", 4, 0)
     @drink3 = Drink.new("Pint of Whisky",600,100)
 
-    # [name,money,age]
+    # [name,  money,  age]
     @customer1 = Customer.new("Peter Whiffle",50,67)
     @customer2 = Customer.new("Janet Staples",25,23)
     @customer3 = Customer.new("Jason Cup",695,19)
@@ -26,7 +26,6 @@ class PubTest < MiniTest::Test
   end
 
   def test_g_and_t_price()
-    # assert_equal(3,@drink1.price())
     assert_equal(3,@drink1.price())
   end
 
@@ -34,8 +33,8 @@ class PubTest < MiniTest::Test
     assert_equal(0,@pub.till)
   end
 
-  def test_base_drunk_level
-    assert_equal(100,@pub.drunk_level)
+  def test_max_drunk_max
+    assert_equal(100,@pub.drunk_max)
   end
 
   def test_min_age
@@ -66,21 +65,28 @@ class PubTest < MiniTest::Test
     assert_equal(false,@pub.age_check(@customer4.age))
   end
 
-  def test_buy_drink
-    # what drink
-    assert_equal(true,@pub.drink_exists("Pint of Whisky"))
-    # drink price
-    assert_equal(600,@drink3.price)
-    # can afford?
-    assert_equal(true,@pub.can_afford(@customer4.money, @drink3.price))
-    # old enough?
-    assert_equal(true,@pub.age_check(@customer3.age))
+  def test_wallet_change
+    @pub.sell_drink(@customer3,"Pint of Whisky")
+    assert_equal(95, @customer3.money)
   end
 
-  # def customer_drunkedness__false
-  #   assert_equal(false,@pub)
+  def test_till_total
+    @pub.sell_drink(@customer3,"Pint of Whisky")
+    assert_equal(600,@pub.till)
+  end
+
+  def test_check_drunkness?()
+    assert_equal("Enjoy.", @pub.sell_drink(@customer3, @drink3))
+    assert_equal(600, @pub.till)
+    assert_equal(95, @customer3.money)
+  end
+
+  # def test_customer_drunkedness__true
+  #   assert_equal("No more drink for you",@pub.sell_drink)
   # end
-
-
+  #
+  # def test_check_drunkness?()
+  #   assert_equal
+  # end
 
 end
